@@ -1,0 +1,17 @@
+[
+  "test_adaugarecos.py::TestAdaugarecos::test_adaugarecos",
+  "test_addcartrule.py::TestAddcartrule::test_addcartrule",
+  "test_backendorderproducts.py::TestBackendorderproducts::test_backendorderproducts",
+  "test_cartrulefail.py::TestCartrulepass::test_cartrulepass",
+  "test_cartrulepass.py::TestCartrulepass::test_cartrulepass",
+  "test_catalogrule.py::TestAddcartrule::test_addcartrule",
+  "test_catalogruleAllAmount.py::TestCatalogruleAllAmount::test_catalogruleAllAmount",
+  "test_catalogruleCondition.py::TestAddcartrule::test_addcartrule",
+  "test_discountpret.py::TestDiscountpret::test_discountpret",
+  "test_maintenance.py::TestMaintenance::test_maintenance",
+  "test_onSaleTag.py::TestOnSaleTag::test_onSaleTag",
+  "test_orderStatus.py::TestOrderStatus::test_orderStatus",
+  "test_ordernumber.py::TestOrdernumber::test_ordernumber",
+  "test_quantityshipping.py::TestQuantityshipping::test_quantityshipping",
+  "test_wishlist.py::TestWishlist::test_wishlist"
+]
