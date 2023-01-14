@@ -13,5 +13,6 @@
   "test_orderStatus.py::TestOrderStatus::test_orderStatus",
   "test_ordernumber.py::TestOrdernumber::test_ordernumber",
   "test_quantityshipping.py::TestQuantityshipping::test_quantityshipping",
+  "test_teardownmethod.py::TestCartrulepass::test_cartrulepass",
   "test_wishlist.py::TestWishlist::test_wishlist"
 ]
