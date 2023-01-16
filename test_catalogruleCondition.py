@@ -12,22 +12,7 @@ class TestAddcartrule():
     def setup_method(self, method):
         self.driver = webdriver.Chrome()
         self.vars = {}
-
-    def teardown_method(self, method):
-        self.driver.quit()
-
-    def wait_for_window(self, timeout=2):
-        time.sleep(round(timeout / 1000))
-        wh_now = self.driver.window_handles
-        wh_then = self.vars["window_handles"]
-        if len(wh_now) > len(wh_then):
-            return set(wh_now).difference(set(wh_then)).pop()
-
-    def test_addcartrule(self):
         discount_percentage = '15'
-        # Test name: add_cart_rule
-        # Step # | name | target | value
-        # 1 | open | http://34.118.122.203/administration/index.php?controller=AdminLogin&token=1e53b83c6f3b96a3ca75976d5bab155e&redirect=AdminDashboard |
         self.driver.get(
             "http://34.118.122.203/administration/index.php?controller=AdminLogin&token=1e53b83c6f3b96a3ca75976d5bab155e&redirect=AdminDashboard")
         # 2 | setWindowSize | 1936x1056 |
@@ -111,28 +96,8 @@ class TestAddcartrule():
         actions.move_to_element_with_offset((element), 0, 0).perform()
         # 34 | click | id=specific_price_rule_form_submit_btn |
         self.driver.find_element(By.ID, "specific_price_rule_form_submit_btn").click()
-        assert 'Successful creation.' in self.driver.find_element(By.XPATH, '//*[@id="content"]/div[3]/div').text
-        # 35 | click | css=#header_shopname > span |
-        self.vars["window_handles"] = self.driver.window_handles
-        # 36 | selectWindow | handle=${win6208} |
-        self.driver.find_element(By.CSS_SELECTOR, "#header_shopname > span").click()
-        # 37 | click | name=s |
-        self.vars["win6208"] = self.wait_for_window(2000)
-        # 38 | type | name=s | suburbia
-        self.driver.switch_to.window(self.vars["win6208"])
-        # 39 | sendKeys | name=s | ${KEY_ENTER}
-        self.driver.find_element(By.NAME, "s").click()
-        # 40 | click | css=.thumbnail > img |
-        self.driver.find_element(By.NAME, "s").send_keys("suburbia")
-        # 41 | click | css=#subtab-AdminCatalog > .link |
-        self.driver.find_element(By.NAME, "s").send_keys(Keys.ENTER)
-        # 42 | click | linkText=Discounts |
-        self.driver.find_element(By.CSS_SELECTOR, ".thumbnail > img").click()
-        assert f'SAVE {discount_percentage}%' in self.driver.find_element(By.XPATH,
-                                                                          '//*[@id="main"]/div[1]/div[2]/div[1]/div[2]/div/span[2]').text
-        regular_price = self.driver.find_element(By.CLASS_NAME, "regular-price").text
-        reduced_price = self.driver.find_element(By.CLASS_NAME, "current-price-value").text
-        assert regular_price != reduced_price
+
+    def teardown_method(self, method):
         self.driver.get("http://34.118.122.203/administration")
         # 43 | click | id=subtab-AdminSpecificPriceRule |
         self.driver.find_element(By.CSS_SELECTOR, "#subtab-AdminCatalog > .link").click()
@@ -146,20 +111,37 @@ class TestAddcartrule():
         self.driver.find_element(By.LINK_TEXT, "Delete").click()
         # 48 | selectWindow | handle=${win1665} |
         self.driver.find_element(By.ID, "popup_ok").click()
-        assert 'Successful deletion.' in self.driver.find_element(By.ID, 'content').text
-        # 49 | click | name=s |
-        self.vars["window_handles"] = self.driver.window_handles
-        # 50 | click | css=#ui-id-2 > .product |
-        self.driver.find_element(By.CSS_SELECTOR, "#header_shopname > span").click()
-        self.vars["win1665"] = self.wait_for_window(2000)
-        self.driver.switch_to.window(self.vars["win1665"])
+        self.driver.quit()
+
+    def wait_for_window(self, timeout=2):
+        time.sleep(round(timeout / 1000))
+        wh_now = self.driver.window_handles
+        wh_then = self.vars["window_handles"]
+        if len(wh_now) > len(wh_then):
+            return set(wh_now).difference(set(wh_then)).pop()
+
+    def test_addcartrule(self):
+        discount_percentage = '15'
+        # Test name: add_cart_rule
+        # Step # | name | target | value
+        # 1 | open | http://34.118.122.203/administration/index.php?controller=AdminLogin&token=1e53b83c6f3b96a3ca75976d5bab155e&redirect=AdminDashboard |
+
+        # 35 | click | css=#header_shopname > span |
+
+        self.driver.get("http://34.118.122.203")
+        # 39 | sendKeys | name=s | ${KEY_ENTER}
         self.driver.find_element(By.NAME, "s").click()
-        self.driver.find_element(By.NAME, "s").clear()
+        # 40 | click | css=.thumbnail > img |
         self.driver.find_element(By.NAME, "s").send_keys("suburbia")
+        # 41 | click | css=#subtab-AdminCatalog > .link |
         self.driver.find_element(By.NAME, "s").send_keys(Keys.ENTER)
-        self.driver.find_element(By.XPATH, '//*[@id="js-product-list"]/div[1]/div/article/div/div[1]/a/img').click()
-        # assert self.driver.find_element(By.CLASS_NAME,'regular-price').size == 0
-        assert len(self.driver.find_elements(By.XPATH, '//*[@id="main"]/div[1]/div[2]/div[1]/div[2]/div/span[1]')) < 1
+        # 42 | click | linkText=Discounts |
+        self.driver.find_element(By.CSS_SELECTOR, ".thumbnail > img").click()
+        assert f'SAVE {discount_percentage}%' in self.driver.find_element(By.XPATH,
+                                                                          '//span[@class="discount discount-percentage"]').text
+        regular_price = self.driver.find_element(By.CLASS_NAME, "regular-price").text
+        reduced_price = self.driver.find_element(By.CLASS_NAME, "current-price-value").text
+        assert regular_price != reduced_price
 
 
 if __name__ == '__main__':

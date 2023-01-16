@@ -53,7 +53,7 @@ class TestOrderStatus():
     # 13 | click | css=.btn-secondary | 
     self.driver.find_element(By.CSS_SELECTOR, ".btn-secondary").click()
     # 14 | click | css=.js-dropdown-item:nth-child(9) |
-    order_status = self.driver.find_element(By.XPATH,'//*[@id="order_grid_table"]/tbody/tr/td[9]/div/div/button[9]').text
+    order_status = self.driver.find_element(By.XPATH,'//*[@id="order_grid_table"]//button[9]').text
     self.driver.find_element(By.CSS_SELECTOR, ".js-dropdown-item:nth-child(9)").click()
     # 15 | click | css=#header_shopname > span | 
     self.vars["window_handles"] = self.driver.window_handles
@@ -96,7 +96,7 @@ class TestOrderStatus():
     # 30 | click | css=#header_shopname > span | 
     self.driver.find_element(By.CSS_SELECTOR, ".btn-secondary").click()
     # 31 | selectWindow | handle=${win2750} |
-    order_status = self.driver.find_element(By.XPATH,'//*[@id="order_grid_table"]/tbody/tr/td[9]/div/div/button[9]').text
+    order_status = self.driver.find_element(By.XPATH,'//*[@id="order_grid_table"]//button[9]').text
     self.driver.find_element(By.CSS_SELECTOR, ".js-dropdown-item:nth-child(9)").click()
     # 32 | click | css=.account > .hidden-sm-down | 
     self.vars["window_handles"] = self.driver.window_handles

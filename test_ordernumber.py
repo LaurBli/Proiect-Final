@@ -109,7 +109,7 @@ class TestOrdernumber():
         self.driver.find_element(By.XPATH,'//*[@id="order_grid_table"]/thead/tr[2]/td[11]/button').click()
         self.driver.find_element(By.XPATH,'//*[@id="order_grid_table"]/tbody/tr').click()
         self.driver.implicitly_wait(10)
-        back_order_number = self.driver.find_element(By.XPATH,'/html/body/div[1]/div[1]/div/div[1]/h1/strong[2]').text
+        back_order_number = self.driver.find_element(By.XPATH,'//*[@class="d-inline"]/strong[2]').text
         assert good_order_number == back_order_number
 
 

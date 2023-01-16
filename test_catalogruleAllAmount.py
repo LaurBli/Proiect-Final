@@ -83,9 +83,9 @@ class TestCatalogruleAllAmount():
     # 25 | click | css=.js-product:nth-child(2) img | 
     self.driver.find_element(By.CSS_SELECTOR, ".js-product:nth-child(1) img").click()
     discount_flag = self.driver.find_element(By.XPATH, '//*[@id="content"]/ul/li').text
-    discount_amount = self.driver.find_element(By.XPATH, '//*[@id="main"]/div[1]/div[2]/div[1]/div[2]/div/span[2]').text
+    discount_amount = self.driver.find_element(By.XPATH, '//span[@class="discount discount-amount"]').text
     current_price = self.driver.find_element(By.CLASS_NAME, 'current-price-value').text
-    regular_price = self.driver.find_element(By.XPATH, '//*[@id="main"]/div[1]/div[2]/div[1]/div[1]/span').text
+    regular_price = self.driver.find_element(By.XPATH, '//div[@class="product-discount"]/span').text
     assert discount in discount_flag
     assert discount in discount_amount
     assert float(regular_price.replace('$', '')) - float(discount) == float(current_price.replace('$', ''))
