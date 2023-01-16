@@ -7,8 +7,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
-
-class TestCartrulepass():
+@pytest.mark.discount
+class TestCartrulefail():
     def setup_method(self, method):
         self.driver = webdriver.Chrome()
         self.vars = {}
@@ -197,7 +197,7 @@ class TestCartrulepass():
         assert 'You have not reached the minimum amount required to use this voucher' in alert_text
         before_discount = self.driver.find_element(By.XPATH, '//*[@id="cart-subtotal-products"]/span[2]').text
         after_discount = self.driver.find_element(By.XPATH,
-                                                  '//*[@id="main"]/div/div[2]/div[1]/div[1]/div[2]/div[1]/span[2]').text
+                                                  '//*[@class="card-block cart-summary-totals js-cart-summary-totals"]/div[1]/span[2]').text
         assert before_discount == after_discount
         self.driver.get(
             "http://34.118.122.203/administration/index.php?controller=AdminCartRules&conf=1&token=7ed6c7391ba2d0f7d26b9578904c11d8")
@@ -219,7 +219,7 @@ class TestCartrulepass():
         self.driver.switch_to.window(self.vars["win3515"])
         self.driver.find_element(By.CSS_SELECTOR, "a:nth-child(1) > .hidden-sm-down").click()
         assert len(
-            self.driver.find_elements(By.XPATH, '//*[@id="main"]/div/div[2]/div[1]/div[1]/div[3]/div/div/ul')) < 1
+            self.driver.find_elements(By.XPATH, '//ul[@class="promo-name card-block"]')) < 1
 
 
 if __name__ == '__main__':
