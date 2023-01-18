@@ -56,7 +56,7 @@ class TestWishlist():
         # 17 | click | css=.js-product:nth-child(1) img |
         self.driver.find_element(By.CSS_SELECTOR, ".js-product:nth-child(1) img").click()
         # 18 | click | css=.js-product:nth-child(1) .wishlist-button-add > .material-icons |
-        self.driver.find_element(By.XPATH,'//*[@id="add-to-cart-or-refresh"]/div[2]/div/button').click()
+        self.driver.find_element(By.XPATH, '//*[@class="wishlist-button-add wishlist-button-product"]').click()
         # 19 | click | css=.wishlist-list-item > p |
         self.driver.implicitly_wait(1)
         self.driver.find_element(By.CSS_SELECTOR, ".wishlist-list-item > p").click()
@@ -81,9 +81,9 @@ class TestWishlist():
         # 25 | click | css=.wishlist-list-item-link |
         self.driver.find_element(By.CSS_SELECTOR, ".wishlist-list-item-link").click()
         assert 'After The Empire (Kickstarter Deluxe Edition)' in self.driver.find_element(By.XPATH,
-                                                                                           '//*[@id="content"]/ul/li[1]/div/a/div[2]/p[1]').text
+                                                                                           '//li[1]//div[2]/p[1]').text
         assert 'Hummingbird printed t-shirt' in self.driver.find_element(By.XPATH,
-                                                                         '//*[@id="content"]/ul/li[2]/div/a/div[2]/p[1]').text
+                                                                         '//li[2]//div[2]/p[1]').text
         # 26 | click | css=.wishlist-products-item:nth-child(2) .wishlist-button-add > .material-icons |
         self.driver.find_element(By.CSS_SELECTOR,
                                  ".wishlist-products-item:nth-child(2) .wishlist-button-add > .material-icons").click()

@@ -36,14 +36,13 @@ class TestQuantityshipping():
         # 8 | click | css=.cart-content-btn > .btn-primary |
         self.driver.find_element(By.CSS_SELECTOR, ".cart-content-btn > .btn-primary").click()
         assert '7.00' in self.driver.find_element(By.XPATH,'//*[@id="cart-subtotal-shipping"]/span[2]').text
-        assert '133.00' in self.driver.find_element(By.XPATH,'//*[@id="main"]/div/div[1]/div/div[2]/ul/li/div/div[3]/div/div[2]/div/div[2]/span/strong').text
+        assert '133.00' in self.driver.find_element(By.XPATH,'//*[@class="product-price"]/strong').text
         # 9 | click | css=.touchspin-up |
-        self.driver.find_element(By.XPATH,
-                                 '//*[@id="main"]/div/div[1]/div/div[2]/ul/li/div/div[3]/div/div[2]/div/div[1]/div/span[3]/button[1]').click()
+        self.driver.find_element(By.XPATH,'//*[@class="input-group-btn-vertical"]/button[1]').click()
         time.sleep(2)
         self.driver.find_element(By.XPATH, '//*[@id="cart"]').click()
 
-        assert '266.00' in self.driver.find_element(By.XPATH,'//*[@id="main"]/div/div[1]/div/div[2]/ul/li/div/div[3]/div/div[2]/div/div[2]/span/strong').text
+        assert '266.00' in self.driver.find_element(By.XPATH,'//*[@class="product-price"]/strong').text
         assert 'Free' in self.driver.find_element(By.XPATH,'//*[@id="cart-subtotal-shipping"]/span[2]').text
 
 
