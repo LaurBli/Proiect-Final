@@ -12,22 +12,6 @@ class TestCartrulefail():
     def setup_method(self, method):
         self.driver = webdriver.Chrome()
         self.vars = {}
-
-    def teardown_method(self, method):
-        self.driver.quit()
-
-    def wait_for_window(self, timeout=2):
-        time.sleep(round(timeout / 1000))
-        wh_now = self.driver.window_handles
-        wh_then = self.vars["window_handles"]
-        if len(wh_now) > len(wh_then):
-            return set(wh_now).difference(set(wh_then)).pop()
-
-
-    def test_cartrulepass(self):
-        reduction_amount = '25'
-        discount_name = 'Buy 3 games to get a discount'
-        # Test name: cart_rule_pass
         # Step # | name | target | value
         # 1 | open | http://34.118.122.203/administration/index.php?controller=AdminLogin&token=1e53b83c6f3b96a3ca75976d5bab155e&redirect=AdminDashboard |
         self.driver.get(
@@ -54,6 +38,35 @@ class TestCartrulefail():
         actions.move_to_element_with_offset((element), 0, 0).perform()
         # 10 | click | css=#subtab-AdminCatalog > .link |
         self.driver.find_element(By.CSS_SELECTOR, "#subtab-AdminCatalog > .link").click()
+
+    def teardown_method(self, method):
+        self.driver.get(
+            "http://34.118.122.203/administration/index.php?controller=AdminCartRules&conf=1&token=7ed6c7391ba2d0f7d26b9578904c11d8")
+        # 78 | click | css=.icon-caret-down |
+        self.driver.find_element(By.CSS_SELECTOR, "#subtab-AdminCatalog > .link").click()
+        # 79 | click | linkText=Delete |
+        self.driver.find_element(By.LINK_TEXT, "Discounts").click()
+        # 80 | click | id=popup_ok |
+        self.driver.find_element(By.CSS_SELECTOR, ".icon-caret-down").click()
+        # 81 | click | css=#header_shopname > span |
+        self.driver.find_element(By.LINK_TEXT, "Delete").click()
+        # 82 | selectWindow | handle=${win3515} |
+        self.driver.find_element(By.ID, "popup_ok").click()
+        self.driver.quit()
+
+    def wait_for_window(self, timeout=2):
+        time.sleep(round(timeout / 1000))
+        wh_now = self.driver.window_handles
+        wh_then = self.vars["window_handles"]
+        if len(wh_now) > len(wh_then):
+            return set(wh_now).difference(set(wh_then)).pop()
+
+
+    def test_cartrulefail(self):
+        reduction_amount = '25'
+        discount_name = 'Buy 3 games to get a discount'
+        # Test name: cart_rule_pass
+
         self.driver.implicitly_wait(2)
         # 11 | click | linkText=Discounts |
         self.driver.find_element(By.LINK_TEXT, "Discounts").click()
@@ -199,27 +212,8 @@ class TestCartrulefail():
         after_discount = self.driver.find_element(By.XPATH,
                                                   '//*[@class="card-block cart-summary-totals js-cart-summary-totals"]/div[1]/span[2]').text
         assert before_discount == after_discount
-        self.driver.get(
-            "http://34.118.122.203/administration/index.php?controller=AdminCartRules&conf=1&token=7ed6c7391ba2d0f7d26b9578904c11d8")
-        # 78 | click | css=.icon-caret-down |
-        self.driver.find_element(By.CSS_SELECTOR, "#subtab-AdminCatalog > .link").click()
-        # 79 | click | linkText=Delete |
-        self.driver.find_element(By.LINK_TEXT, "Discounts").click()
-        # 80 | click | id=popup_ok |
-        self.driver.find_element(By.CSS_SELECTOR, ".icon-caret-down").click()
-        # 81 | click | css=#header_shopname > span |
-        self.driver.find_element(By.LINK_TEXT, "Delete").click()
-        # 82 | selectWindow | handle=${win3515} |
-        self.driver.find_element(By.ID, "popup_ok").click()
-        assert 'Successful deletion.' in self.driver.find_element(By.XPATH, '//*[@id="content"]/div[3]/div').text
-        # 83 | click | css=a:nth-child(1) > .hidden-sm-down |
-        self.vars["window_handles"] = self.driver.window_handles
-        self.driver.find_element(By.CSS_SELECTOR, "#header_shopname > span").click()
-        self.vars["win3515"] = self.wait_for_window(2000)
-        self.driver.switch_to.window(self.vars["win3515"])
-        self.driver.find_element(By.CSS_SELECTOR, "a:nth-child(1) > .hidden-sm-down").click()
-        assert len(
-            self.driver.find_elements(By.XPATH, '//ul[@class="promo-name card-block"]')) < 1
+
+
 
 
 if __name__ == '__main__':

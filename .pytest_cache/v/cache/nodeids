@@ -2,6 +2,7 @@
   "test_adaugarecos.py::TestAdaugarecos::test_adaugarecos",
   "test_addcartrule.py::TestAddcartrule::test_addcartrule",
   "test_backendorderproducts.py::TestBackendorderproducts::test_backendorderproducts",
+  "test_cartrulefail.py::TestCartrulefail::test_cartrulefail",
   "test_cartrulefail.py::TestCartrulefail::test_cartrulepass",
   "test_cartrulefail.py::TestCartrulepass::test_cartrulepass",
   "test_cartrulepass.py::TestCartrulepass::test_cartrulepass",

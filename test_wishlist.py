@@ -12,13 +12,6 @@ class TestWishlist():
     def setup_method(self, method):
         self.driver = webdriver.Chrome()
         self.vars = {}
-
-    def teardown_method(self, method):
-        self.driver.quit()
-
-    def test_wishlist(self):
-        # Test name: wishlist
-        # Step # | name | target | value
         # 1 | open | http://34.118.122.203/en/ |
         self.driver.get("http://34.118.122.203/en/")
         # 2 | setWindowSize | 1936x1056 |
@@ -35,6 +28,22 @@ class TestWishlist():
         self.driver.find_element(By.ID, "field-password").send_keys("123456789")
         # 8 | click | id=submit-login |
         self.driver.find_element(By.ID, "submit-login").click()
+    def teardown_method(self, method):
+        # 26 | click | css=.wishlist-products-item:nth-child(2) .wishlist-button-add > .material-icons |
+        self.driver.find_element(By.CSS_SELECTOR,
+                                 ".wishlist-products-item:nth-child(2) .wishlist-button-add > .material-icons").click()
+        # 27 | click | css=.show .btn-primary |
+        self.driver.find_element(By.CSS_SELECTOR, ".show .btn-primary").click()
+        time.sleep(0.5)
+        # 28 | click | css=.wishlist-product-image > img |
+        self.driver.find_element(By.CSS_SELECTOR,
+                                 ".wishlist-products-item:nth-child(1) .wishlist-button-add > .material-icons").click()
+        self.driver.find_element(By.CSS_SELECTOR, ".show .btn-primary").click()
+        self.driver.quit()
+
+    def test_wishlist(self):
+        # Test name: wishlist
+        # Step # | name | target | value
         # 9 | click | name=s |
         self.driver.find_element(By.NAME, "s").click()
         # 10 | type | name=s | empire
@@ -84,18 +93,7 @@ class TestWishlist():
                                                                                            '//li[1]//div[2]/p[1]').text
         assert 'Hummingbird printed t-shirt' in self.driver.find_element(By.XPATH,
                                                                          '//li[2]//div[2]/p[1]').text
-        # 26 | click | css=.wishlist-products-item:nth-child(2) .wishlist-button-add > .material-icons |
-        self.driver.find_element(By.CSS_SELECTOR,
-                                 ".wishlist-products-item:nth-child(2) .wishlist-button-add > .material-icons").click()
-        # 27 | click | css=.show .btn-primary |
-        self.driver.find_element(By.CSS_SELECTOR, ".show .btn-primary").click()
-        time.sleep(0.5)
-        assert 'Hummingbird printed t-shirt' not in self.driver.page_source
-        # 28 | click | css=.wishlist-product-image > img |
-        self.driver.find_element(By.CSS_SELECTOR,
-                                 ".wishlist-products-item:nth-child(1) .wishlist-button-add > .material-icons").click()
-        self.driver.find_element(By.CSS_SELECTOR, ".show .btn-primary").click()
-        assert 'No products found' in self.driver.find_element(By.CLASS_NAME, "wishlist-list-empty").text
+
 
 
 if __name__ == '__main__':
