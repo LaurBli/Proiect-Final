@@ -7,6 +7,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 
 
+@pytest.mark.testSuite
+@pytest.mark.general
 class TestMaintenance():
     def setup_method(self, method):
         self.driver = webdriver.Chrome()
@@ -92,10 +94,9 @@ class TestMaintenance():
         self.driver.implicitly_wait(2)
         self.driver.find_element(By.XPATH, '//*[@id="form_enable_shop_1"]').click()
         self.driver.find_element(By.ID, "form-maintenance-save-button").click()
-        assert 'Successful update' in self.driver.find_element(By.CLASS_NAME,"alert-text").text
+        assert 'Successful update' in self.driver.find_element(By.CLASS_NAME, "alert-text").text
         self.driver.get('http://34.118.122.203/')
-        assert 'popular products' in self.driver.find_element(By.ID,'main').text.lower()
-
+        assert 'popular products' in self.driver.find_element(By.ID, 'main').text.lower()
 
 
 if __name__ == '__main__':

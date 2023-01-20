@@ -7,6 +7,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 
+@pytest.mark.testSuite
+@pytest.mark.cart
 class TestQuantityshipping():
     def setup_method(self, method):
         self.driver = webdriver.Chrome()
@@ -35,15 +37,15 @@ class TestQuantityshipping():
         self.driver.find_element(By.CSS_SELECTOR, ".add-to-cart").click()
         # 8 | click | css=.cart-content-btn > .btn-primary |
         self.driver.find_element(By.CSS_SELECTOR, ".cart-content-btn > .btn-primary").click()
-        assert '7.00' in self.driver.find_element(By.XPATH,'//*[@id="cart-subtotal-shipping"]/span[2]').text
-        assert '133.00' in self.driver.find_element(By.XPATH,'//*[@class="product-price"]/strong').text
+        assert '7.00' in self.driver.find_element(By.XPATH, '//*[@id="cart-subtotal-shipping"]/span[2]').text
+        assert '133.00' in self.driver.find_element(By.XPATH, '//*[@class="product-price"]/strong').text
         # 9 | click | css=.touchspin-up |
-        self.driver.find_element(By.XPATH,'//*[@class="input-group-btn-vertical"]/button[1]').click()
+        self.driver.find_element(By.XPATH, '//*[@class="input-group-btn-vertical"]/button[1]').click()
         time.sleep(2)
         self.driver.find_element(By.XPATH, '//*[@id="cart"]').click()
 
-        assert '266.00' in self.driver.find_element(By.XPATH,'//*[@class="product-price"]/strong').text
-        assert 'Free' in self.driver.find_element(By.XPATH,'//*[@id="cart-subtotal-shipping"]/span[2]').text
+        assert '266.00' in self.driver.find_element(By.XPATH, '//*[@class="product-price"]/strong').text
+        assert 'Free' in self.driver.find_element(By.XPATH, '//*[@id="cart-subtotal-shipping"]/span[2]').text
 
 
 if __name__ == '__main__':

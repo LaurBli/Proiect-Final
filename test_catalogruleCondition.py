@@ -8,6 +8,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 
+@pytest.mark.testSuite
+@pytest.mark.discount
 class TestAddcartrule():
     def setup_method(self, method):
         self.driver = webdriver.Chrome()

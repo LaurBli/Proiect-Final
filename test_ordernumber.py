@@ -5,6 +5,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 
+@pytest.mark.testSuite
+@pytest.mark.order
 class TestOrdernumber():
     def setup_method(self, method):
         self.driver = webdriver.Chrome()
@@ -84,8 +86,8 @@ class TestOrdernumber():
         assert self.driver.find_element(By.ID, "conditions_to_approve[terms-and-conditions]").is_selected() is True
         # 34 | click | css=.ps-shown-by-js > .btn |
         self.driver.find_element(By.CSS_SELECTOR, ".ps-shown-by-js > .btn").click()
-        order_number = self.driver.find_element(By.XPATH,'//*[@id="order-reference-value"]').text
-        good_order_number = order_number.replace('Order reference: ','')
+        order_number = self.driver.find_element(By.XPATH, '//*[@id="order-reference-value"]').text
+        good_order_number = order_number.replace('Order reference: ', '')
         self.driver.get(
             "http://34.118.122.203/administration/index.php?controller=AdminDashboard&token=439eb29f8901e56895dc8022ccef73eb")
         # 35 | click | id=email |
@@ -100,16 +102,16 @@ class TestOrdernumber():
         self.driver.find_element(By.ID, "email").send_keys("user@example.com")
         # 40 | click | id=submit_login |
         self.driver.find_element(By.ID, "submit_login").click()
-        self.driver.find_element(By.CSS_SELECTOR,'#subtab-AdminParentOrders').click()
-        self.driver.find_element(By.XPATH,'//*[@id="subtab-AdminOrders"]/a').click()
+        self.driver.find_element(By.CSS_SELECTOR, '#subtab-AdminParentOrders').click()
+        self.driver.find_element(By.XPATH, '//*[@id="subtab-AdminOrders"]/a').click()
         self.driver.implicitly_wait(5)
-        self.driver.find_element(By.XPATH,'//*[@id="order_reference"]').click()
+        self.driver.find_element(By.XPATH, '//*[@id="order_reference"]').click()
         self.driver.find_element(By.XPATH, '//*[@id="order_reference"]').clear()
         self.driver.find_element(By.XPATH, '//*[@id="order_reference"]').send_keys(good_order_number)
-        self.driver.find_element(By.XPATH,'//*[@id="order_grid_table"]/thead/tr[2]/td[11]/button').click()
-        self.driver.find_element(By.XPATH,'//*[@id="order_grid_table"]/tbody/tr').click()
+        self.driver.find_element(By.XPATH, '//*[@id="order_grid_table"]/thead/tr[2]/td[11]/button').click()
+        self.driver.find_element(By.XPATH, '//*[@id="order_grid_table"]/tbody/tr').click()
         self.driver.implicitly_wait(10)
-        back_order_number = self.driver.find_element(By.XPATH,'//*[@class="d-inline"]/strong[2]').text
+        back_order_number = self.driver.find_element(By.XPATH, '//*[@class="d-inline"]/strong[2]').text
         assert good_order_number == back_order_number
 
 

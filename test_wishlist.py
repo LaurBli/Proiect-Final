@@ -8,6 +8,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 
+@pytest.mark.testSuite
+@pytest.mark.account
 class TestWishlist():
     def setup_method(self, method):
         self.driver = webdriver.Chrome()
@@ -28,6 +30,7 @@ class TestWishlist():
         self.driver.find_element(By.ID, "field-password").send_keys("123456789")
         # 8 | click | id=submit-login |
         self.driver.find_element(By.ID, "submit-login").click()
+
     def teardown_method(self, method):
         # 26 | click | css=.wishlist-products-item:nth-child(2) .wishlist-button-add > .material-icons |
         self.driver.find_element(By.CSS_SELECTOR,
@@ -93,7 +96,6 @@ class TestWishlist():
                                                                                            '//li[1]//div[2]/p[1]').text
         assert 'Hummingbird printed t-shirt' in self.driver.find_element(By.XPATH,
                                                                          '//li[2]//div[2]/p[1]').text
-
 
 
 if __name__ == '__main__':

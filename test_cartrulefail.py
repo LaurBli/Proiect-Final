@@ -7,6 +7,8 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
+
+@pytest.mark.testSuite
 @pytest.mark.discount
 class TestCartrulefail():
     def setup_method(self, method):
