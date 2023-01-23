@@ -9,12 +9,18 @@
   "test_catalogrule.py::TestAddcartrule::test_addcartrule",
   "test_catalogruleAllAmount.py::TestCatalogruleAllAmount::test_catalogruleAllAmount",
   "test_catalogruleCondition.py::TestAddcartrule::test_addcartrule",
+  "test_catalogruleCondition.py::TestCatalogRuleCondition::test_CatalogRuleCondition",
   "test_discountpret.py::TestDiscountpret::test_discountpret",
   "test_maintenance.py::TestMaintenance::test_maintenance",
   "test_onSaleTag.py::TestOnSaleTag::test_onSaleTag",
+  "test_onSaleTag.py::TestOnSaleTagOn::test_onSaleTagOn",
+  "test_onSaleTagOff.py::TestOnSaleTagOn::test_onSaleTagOff",
+  "test_onSaleTagOn.py::TestOnSaleTagOn::test_onSaleTagOn",
   "test_orderStatus.py::TestOrderStatus::test_orderStatus",
   "test_ordernumber.py::TestOrdernumber::test_ordernumber",
   "test_quantityshipping.py::TestQuantityshipping::test_quantityshipping",
   "test_teardownmethod.py::TestCartrulepass::test_cartrulepass",
-  "test_wishlist.py::TestWishlist::test_wishlist"
+  "test_wishlist.py::TestWishlist::test_wishlist",
+  "test_wishlistAdd.py::TestWishlistAdd::test_wishlistAdd",
+  "test_wishlistRemove.py::TestWishlistRemove::test_wishlistRemove"
 ]
