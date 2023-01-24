@@ -14,6 +14,18 @@ class TestOnSaleTagOn():
     def setup_method(self, method):
         self.driver = webdriver.Chrome()
         self.vars = {}
+
+    def teardown_method(self, method):
+        self.driver.quit()
+
+    def wait_for_window(self, timeout=2):
+        time.sleep(round(timeout / 1000))
+        wh_now = self.driver.window_handles
+        wh_then = self.vars["window_handles"]
+        if len(wh_now) > len(wh_then):
+            return set(wh_now).difference(set(wh_then)).pop()
+
+    def test_onSaleTagOn(self):
         self.driver.get("http://34.118.122.203/administration/index.php?controller=AdminLogin&token=1e53b83c6f3b96a3ca75976d5bab155e")
         self.driver.set_window_size(1936, 1056)
         self.driver.find_element(By.ID, "email").click()
@@ -47,8 +59,12 @@ class TestOnSaleTagOn():
         self.driver.find_element(By.CSS_SELECTOR, "#header_shopname > span").click()
         self.vars["win2688"] = self.wait_for_window(2000)
         self.driver.switch_to.window(self.vars["win2688"])
-
-    def teardown_method(self, method):
+        self.driver.find_element(By.NAME, "s").click()
+        self.driver.find_element(By.NAME, "s").send_keys("suburbia")
+        self.driver.find_element(By.NAME, "s").send_keys(Keys.ENTER)
+        assert 'on sale!' in self.driver.find_element(By.ID, 'js-product-list').text.lower()
+        self.driver.find_element(By.CSS_SELECTOR, ".thumbnail > img").click()
+        assert 'on sale!' in self.driver.find_element(By.ID, 'content').text.lower()
         self.driver.get("http://34.118.122.203/administration/index.php?controller=AdminLogin&token=1e53b83c6f3b96a3ca75976d5bab155e")
         self.driver.find_element(By.ID, "email").click()
         self.driver.find_element(By.ID, "email").send_keys("user@example.com")
@@ -70,23 +86,3 @@ class TestOnSaleTagOn():
         actions = ActionChains(self.driver)
         actions.move_to_element(element).perform()
         self.driver.find_element(By.ID, "submit").click()
-        self.driver.quit()
-
-    def wait_for_window(self, timeout=2):
-        time.sleep(round(timeout / 1000))
-        wh_now = self.driver.window_handles
-        wh_then = self.vars["window_handles"]
-        if len(wh_now) > len(wh_then):
-            return set(wh_now).difference(set(wh_then)).pop()
-
-    def test_onSaleTagOn(self):
-
-        self.driver.find_element(By.NAME, "s").click()
-        self.driver.find_element(By.NAME, "s").send_keys("suburbia")
-        self.driver.find_element(By.NAME, "s").send_keys(Keys.ENTER)
-        assert 'on sale!' in self.driver.find_element(By.ID, 'js-product-list').text.lower()
-        self.driver.find_element(By.CSS_SELECTOR, ".thumbnail > img").click()
-        assert 'on sale!' in self.driver.find_element(By.ID, 'content').text.lower()
-
-
-
